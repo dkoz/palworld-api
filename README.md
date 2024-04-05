@@ -1,5 +1,5 @@
 # Palworld REST API Wrapper
- `palworld-api` is an API wrapper for the new Palworld Rest API. This supports all endpoints of the API and has been thoroughly tested.
+ This is a simple Palworld REST API Wrapper for Python project. This supports all API endpoints for Palworld.
 
 ## Version
 > v1.0.0
@@ -9,6 +9,11 @@
    ```bash
    pip install palworld-api
    ```
+2. Import into your project.
+   ```python
+   import asyncio
+   from palworld_api import PalworldAPI
+   ```
 
 ## Requirements
 - Python 3.8+
@@ -16,8 +21,11 @@
 
 ## Usage
  Refer to example files to get an idea of how this works. Here is a basic usage:
- ```
- async def main():
+ ```python
+import asyncio
+from palworld_api import PalworldAPI
+
+async def main():
     server_url = "http://localhost:8212"
     username = "admin"
     password = "admin password"
