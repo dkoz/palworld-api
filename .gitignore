@@ -1,0 +1,15 @@
+# Byte-compiled files
+__pycache__/
+*.pyc
+
+# Distribution files
+dist/
+*.egg-info/
+
+# Virtual environment
+venv/
+.env
+
+# IDE settings
+.idea/
+.vscode/
