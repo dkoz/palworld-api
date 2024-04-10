@@ -2,7 +2,7 @@
  This is a simple Palworld REST API Wrapper for Python project. This supports all API endpoints for Palworld.
 
 ## Version
-> v1.0.0
+> v1.0.1
 
 ## Installation
 1. Install `palworld-api` using pip:

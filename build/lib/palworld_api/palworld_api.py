@@ -14,12 +14,21 @@ class PalworldAPI:
         """
         General method for fetching data from a given URL.
         """
-        async with session.get(url, headers=self.headers, auth=self.auth) as response:
-            response.raise_for_status()
-            if 'application/json' in response.headers.get('Content-Type', ''):
-                return await response.json()
-            else:
-                return await response.text()
+        try:
+            async with session.get(url, headers=self.headers, auth=self.auth) as response:
+                response.raise_for_status()
+                if 'application/json' in response.headers.get('Content-Type', ''):
+                    return await response.json()
+                else:
+                    return await response.text()
+        except aiohttp.ClientResponseError as e:
+            return {'error': f'Client error {e.status}: {e.message}'}
+        except aiohttp.ClientConnectionError:
+            return {'error': 'Connection error'}
+        except asyncio.TimeoutError:
+            return {'error': 'Request timeout'}
+        except Exception as e:
+            return {'error': str(e)}
 
     async def get_server_info(self):
         """
