@@ -2,10 +2,10 @@ from setuptools import setup, find_packages
 
 setup(
     name='palworld-api',
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages(),
     install_requires=[
-        'aiohttp==3.9.3',
+        'aiohttp==3.9.5',
     ],
     python_requires='>=3.8',
     description='A Python API wrapper for the Palworld Rest API.',
