@@ -7,13 +7,8 @@ async def main():
     password = "admin password"
     api = PalworldAPI(server_url, username, password)
 
-    # Retrieve server information
-    server_info = await api.get_server_info()
-    print("Server Info:", server_info)
-
-    # Retrieve server metrics
-    server_metrics = await api.get_server_metrics()
-    print("Server Metrics:", server_metrics)
+    player_list = await api.get_player_list()
+    print("Player List:", player_list)
 
 if __name__ == "__main__":
     asyncio.run(main())

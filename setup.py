@@ -5,9 +5,9 @@ setup(
     version='1.0.2',
     packages=find_packages(),
     install_requires=[
-        'aiohttp==3.9.5',
+        'aiohttp==3.10.10',
     ],
-    python_requires='>=3.8',
+    python_requires='>=3.11',
     description='A Python API wrapper for the Palworld Rest API.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
