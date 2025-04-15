@@ -9,21 +9,15 @@ class PalworldAPI:
         self.server_url = server_url
         self.auth = aiohttp.BasicAuth(login=username, password=password)
         self.headers = {'Accept': 'application/json', 'Content-Type': 'application/json'}
-        self.session = aiohttp.ClientSession()
-
-    async def __aenter__(self):
-        return self
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        await self.session.close()
 
     async def fetch(self, url):
         try:
-            async with self.session.get(url, headers=self.headers, auth=self.auth) as response:
-                response.raise_for_status()
-                if 'application/json' in response.headers.get('Content-Type', ''):
-                    return await response.json()
-                return await response.text()
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, headers=self.headers, auth=self.auth) as response:
+                    response.raise_for_status()
+                    if 'application/json' in response.headers.get('Content-Type', ''):
+                        return await response.json()
+                    return await response.text()
         except aiohttp.ClientResponseError as e:
             return {'error': f'Client error {e.status}: {e.message}'}
         except aiohttp.ClientConnectionError:
@@ -36,12 +30,13 @@ class PalworldAPI:
     async def post(self, endpoint, payload=None):
         url = f"{self.server_url}{endpoint}"
         try:
-            async with self.session.post(url, json=payload, headers=self.headers, auth=self.auth) as response:
-                response.raise_for_status()
-                try:
-                    return await response.json()
-                except aiohttp.ContentTypeError:
-                    return await response.text()
+            async with aiohttp.ClientSession() as session:
+                async with session.post(url, json=payload, headers=self.headers, auth=self.auth) as response:
+                    response.raise_for_status()
+                    try:
+                        return await response.json()
+                    except aiohttp.ContentTypeError:
+                        return await response.text()
         except aiohttp.ClientResponseError as e:
             return {'error': f'Client error {e.status}: {e.message}'}
         except aiohttp.ClientConnectionError:
@@ -121,13 +116,13 @@ async def main():
     server_url = "http://localhost:8212"
     username = "admin"
     password = "admin password"
-    async with PalworldAPI(server_url, username, password) as api:
-        server_info = await api.get_server_info()
-        print("Server Info:", server_info)
-        player_list = await api.get_player_list()
-        print("Player List:", player_list)
-        server_metrics = await api.get_server_metrics()
-        print("Server Metrics:", server_metrics)
+    api = PalworldAPI(server_url, username, password)
+    server_info = await api.get_server_info()
+    print("Server Info:", server_info)
+    player_list = await api.get_player_list()
+    print("Player List:", player_list)
+    server_metrics = await api.get_server_metrics()
+    print("Server Metrics:", server_metrics)
 
 if __name__ == "__main__":
     asyncio.run(main())
