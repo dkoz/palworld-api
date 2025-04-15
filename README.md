@@ -2,7 +2,7 @@
  This is a simple Palworld REST API Wrapper for Python project. This supports all API endpoints for Palworld.
 
 ## Version
-> v1.0.3
+> v1.0.4
 
 ## Installation
 1. Install `palworld-api` using pip:
@@ -39,4 +39,4 @@ if __name__ == "__main__":
 ```
 
 ## Resources
- For detailed documentation on the Palworld REST API, check out the official [REST API Documentation](https://tech.palworldgame.com/api/rest-api/palwold-rest-api/).
+ For detailed documentation on the Palworld REST API, check out the official [REST API Documentation](https://docs.palworldgame.com/api/rest-api/palwold-rest-api/).
